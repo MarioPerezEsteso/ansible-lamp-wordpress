@@ -1,0 +1,25 @@
+{{ apache_global_vhost_settings }}
+
+{% for vhost in apache_vhosts %}
+<VirtualHost {{ apache_listen_ip }}:{{ apache_listen_port }}>
+  ServerName {{ vhost.servername }}
+{% if vhost.serveralias is defined %}
+  ServerAlias {{ vhost.serveralias }}
+{% endif %}
+{% if vhost.documentroot is defined %}
+  DocumentRoot "{{ vhost.documentroot }}"
+{% endif %}
+
+{% if vhost.serveradmin is defined %}
+  ServerAdmin {{ vhost.serveradmin }}
+{% endif %}
+{% if vhost.documentroot is defined %}
+  <Directory "{{ vhost.documentroot }}">
+    AllowOverride {{ vhost.allow_override | default(apache_allow_override) }}
+    Options {{ vhost.options | default(apache_options) }}
+    Require all granted
+{% endif %}
+  </Directory>
+</VirtualHost>
+
+{% endfor %}

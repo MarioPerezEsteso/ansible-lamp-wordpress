@@ -1,0 +1,36 @@
+---
+
+# Configuration for Apache in Ubuntu 16.04
+apache_daemon: apache2
+apache_daemon_path: /usr/sbin/
+apache_server_root: /etc/apache2
+apache_conf_path: /etc/apache2
+
+apache_listen_ip: "*"
+apache_listen_port: 80
+
+apache_create_vhosts: true
+apache_vhosts_filename: "vhosts.conf"
+apache_vhosts_template: "vhosts.conf.j2"
+
+# On Debian/Ubuntu, a default virtualhost is included in Apache's configuration.
+# Set this to `true` to remove that default.
+apache_remove_default_vhost: false
+
+apache_global_vhost_settings: |
+  DirectoryIndex index.php index.html
+
+apache_vhosts:
+  - servername: "local.dev"
+    documentroot: "{{ webserver_root }}"
+
+apache_allow_override: "All"
+apache_options: "-Indexes +FollowSymLinks"
+
+# Only used on Debian/Ubuntu.
+apache_mods_enabled:
+  - rewrite.load
+
+packages:
+  - apache2
+  - apache2-utils

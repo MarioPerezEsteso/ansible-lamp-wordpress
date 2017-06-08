@@ -1,0 +1,13 @@
+---
+
+mysql_port: 3306
+mysql_bind_address: "0.0.0.0"
+mysql_root_db_pass: root
+
+mysql_db: 
+  - name: wordpressdb
+
+mysql_users:
+  - name: wpuser
+    pass: wpuser
+    priv: "*.*:ALL"

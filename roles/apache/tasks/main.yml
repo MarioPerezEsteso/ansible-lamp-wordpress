@@ -1,0 +1,18 @@
+---
+
+- name: Define apache_packages.
+  set_fact:
+    apache_packages: "{{ packages | list }}"
+  when: apache_packages is not defined
+
+- include: setup.yml
+  static: no
+
+- include: configure.yml
+  static: no
+
+- name: Ensure Apache has selected state and enabled on boot.
+  service:
+    name: apache2
+    state: started
+    enabled: yes

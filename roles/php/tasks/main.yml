@@ -1,0 +1,10 @@
+---
+# tasks file for roles/php-fpm
+
+- name: Install the php packages
+  apt: name={{ item }} state=present
+  with_items: "{{ php_fpm_packages }}"
+
+- name: Restart the apache2 service
+  service: name=apache2 state=reloaded
+

@@ -1,0 +1,6 @@
+---
+
+wp_version: 4.7.5
+wp_url: "https://es.wordpress.org/wordpress-{{ wp_version }}-es_ES.zip"
+wp_download_path: "/tmp/wordpress-{{ wp_version }}.zip"
+wp_webserver_path: "{{ webserver_root }}"
